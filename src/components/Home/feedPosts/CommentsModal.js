@@ -15,7 +15,7 @@ const CommentsModal = () => {
 
                     <div className='pt-4'>
                         {/* show comments */}
-                        <div className='max-h-96 overflow-y-scroll'>
+                        <div className='max-h-96 overflow-y-auto'>
                             <Comment />
                             <Comment />
                             <Comment />
