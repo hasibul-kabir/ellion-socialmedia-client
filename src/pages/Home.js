@@ -14,7 +14,7 @@ const Home = () => {
                     <Systems />
                 </div>
 
-                <div className='feed col-span-2 flex flex-col'>
+                <div className='feed md:col-span-2 flex flex-col'>
                     <CreatePost />
                     <FeedPosts />
                 </div>

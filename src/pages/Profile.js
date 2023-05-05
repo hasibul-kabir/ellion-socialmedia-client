@@ -16,7 +16,7 @@ const Profile = () => {
                     <About />
                 </div>
 
-                <div className='feed col-span-4 flex flex-col'>
+                <div className='feed md:col-span-4 flex flex-col'>
                     <ProfileStatus />
                     <CreatePost />
                     <FeedPosts />

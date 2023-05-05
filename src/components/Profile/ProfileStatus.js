@@ -16,8 +16,9 @@ const ProfileStatus = () => {
                     </div>
                 </div>
                 <h5 className=' text-lg font-bold text-neutral-700'>clark kent</h5>
+                <p className='text-xs text-neutral-600 font-medium'>500 friends</p>
 
-                <div className='flex justify-center gap-x-4 items-center py-3 text-base font-semibold text-neutral-300'>
+                <div className='flex justify-center gap-x-4 items-center py-3 text-base font-semibold text-neutral-100'>
                     {/* <div className='flex gap-x-1 items-center px-3 py-2 rounded-md bg-primary'>
                         <HiUserAdd />
                         <p>Add Friend</p>
