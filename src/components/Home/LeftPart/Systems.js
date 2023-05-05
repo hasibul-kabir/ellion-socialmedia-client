@@ -7,7 +7,7 @@ import { AiOutlineFieldTime } from 'react-icons/ai';
 
 const Systems = () => {
     return (
-        <div className='p-3 w-full rounded-md bg-base-100'>
+        <div className='p-3 w-full rounded-md bg-base-100 sticky top-[10%]'>
             <EachUser />
 
             <div className='mt-2 flex flex-col gap-y-1'>
