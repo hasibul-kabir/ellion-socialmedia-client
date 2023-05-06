@@ -5,6 +5,7 @@ import avatar from '../../assets/images/profile1.jpg';
 import { FaUserFriends } from 'react-icons/fa';
 import { HiUserAdd } from 'react-icons/hi';
 import { AiOutlineMessage } from 'react-icons/ai';
+import About from './About';
 
 const ProfileStatus = () => {
     return (
@@ -34,6 +35,10 @@ const ProfileStatus = () => {
                     </div>
                 </div>
 
+            </div>
+
+            <div className='md:hidden'>
+                <About />
             </div>
         </div>
     )

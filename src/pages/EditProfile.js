@@ -5,10 +5,10 @@ const EditProfile = () => {
     return (
         <Layout>
             <div className='mx-5 md:mx-10 flex justify-center items-center h-[100vh]'>
-                <div className='p-5 w-3/5 rounded-md bg-base-100'>
+                <div className='p-5 w-full md:w-3/5 rounded-md bg-base-100'>
                     <h3 className='text-lg font-bold text-neutral-700 text-center'>Edit Profile</h3>
 
-                    <form className='mt-3 flex flex-col gap-y-5'>
+                    <form className='mt-3 flex flex-col gap-y-5 text-base text-neutral-700 font-semibold'>
                         <div className='flex flex-col gap-y-5 md:flex-row md:gap-x-5'>
                             <input className='px-3 py-2 w-full md:w-1/2 rounded-md border border-neutral-400 shadow-md focus:outline-none' type='text' />
                             <input className='px-3 py-2 w-full md:w-1/2 rounded-md border border-neutral-400 shadow-md focus:outline-none' type='text' />

@@ -6,6 +6,8 @@ import CommentsModal from './CommentsModal';
 
 import { BiCommentDetail } from 'react-icons/bi';
 import { AiOutlineLike, AiTwotoneLike } from 'react-icons/ai';
+import { BsThreeDots } from 'react-icons/bs';
+import EditPostModal from './EditPostModal';
 
 
 const Post = () => {
@@ -13,16 +15,30 @@ const Post = () => {
         <>
             <div className="bg-base-100 rounded-lg p-5">
                 {/* author */}
-                <div className="flex items-center gap-x-3">
-                    <div className="avatar online">
-                        <div className="w-12 rounded-full">
-                            <img src={avatar} alt='avatar-img' />
+                <div className="flex items-stretch justify-between">
+
+                    <div className='flex items-center gap-x-3'>
+                        <div className="avatar online">
+                            <div className="w-12 rounded-full">
+                                <img src={avatar} alt='avatar-img' />
+                            </div>
+                        </div>
+                        <div>
+                            <div className="font-bold">Hart Hagerty</div>
+                            <div className="text-sm opacity-50">May 1, 2023</div>
                         </div>
                     </div>
-                    <div>
-                        <div className="font-bold">Hart Hagerty</div>
-                        <div className="text-sm opacity-50">May 1, 2023</div>
+
+                    <div className="dropdown dropdown-bottom dropdown-end">
+                        <label tabIndex={0}>
+                            <BsThreeDots className='text-xl cursor-pointer' />
+                        </label>
+                        <ul tabIndex={0} className="dropdown-content menu p-2 shadow-xl bg-base-200 rounded-md w-52">
+                            <label className='p-2 rounded-md hover:bg-base-100 font-semibold text-neutral-700 cursor-pointer' htmlFor='editpost-modal' >Edit Post</label>
+                            <label className='p-2 rounded-md hover:bg-base-100 font-semibold text-neutral-700 cursor-pointer' >Delete Post</label>
+                        </ul>
                     </div>
+
                 </div>
                 {/* author */}
 
@@ -43,7 +59,10 @@ const Post = () => {
                 {/* post reactions */}
 
             </div>
+
+            {/* modals */}
             <CommentsModal />
+            <EditPostModal />
         </>
     )
 }
