@@ -24,7 +24,7 @@ const LoginForm = () => {
                     <button className="btn btn-primary">Login</button>
                 </div>
                 <div className='pt-2 text-sm font-semibold text-neutral-700'>
-                    Not have an account? <Link className=' text-primary hover:underline'>Register</Link>
+                    Not have an account? <Link className=' text-primary hover:underline' to='/registration' >Register</Link>
                 </div>
             </form>
         </div>
