@@ -1,64 +1,146 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Dropzone from 'react-dropzone'
+import { useDropzone } from 'react-dropzone'
+import { useFormik } from 'formik'
+import { signupSchema } from '../../form-validations/signupValidation'
 
 const RegistrationForm = () => {
+
+    const initialValues = {
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        location: '',
+        occupation: ''
+    }
+
+    const { getRootProps, getInputProps, isDragActive, acceptedFiles } = useDropzone();
+
+    const { values, errors, handleSubmit, handleChange, handleBlur, touched } = useFormik({
+        initialValues: initialValues,
+        validationSchema: signupSchema,
+        onSubmit: (values) => {
+            console.log({ ...values, picturePath: acceptedFiles[0] });
+        }
+    })
+
+
+    // const onDrop = useCallback(acceptedFiles => {
+    //     // Do something with the files
+    //     // console.log(acceptedFiles);
+    // }, [])
+
+    // console.log(acceptedFiles[0]);
+
     return (
         <div className="card-body">
-            <form>
+            <form onSubmit={handleSubmit}>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text">First Name</span>
                     </label>
-                    <input type="text" placeholder="first name" className="input input-bordered" />
+                    <input
+                        type="text"
+                        placeholder="first name"
+                        className="input input-bordered"
+                        id='firstName'
+                        value={values.firstName}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                    />
+                    {errors.firstName && touched.firstName && <p className='text-error text-xs py-1'>{errors.firstName}</p>}
                 </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text">Last Name</span>
                     </label>
-                    <input type="text" placeholder="last name" className="input input-bordered" />
+                    <input
+                        type="text"
+                        placeholder="last name"
+                        className="input input-bordered"
+                        id='lastName'
+                        value={values.lastName}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                    />
+                    {errors.lastName && touched.lastName && <p className='text-error text-xs py-1'>{errors.lastName}</p>}
                 </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text">Occupation</span>
                     </label>
-                    <input type="text" placeholder="Enter your occupation" className="input input-bordered" />
+                    <input type="text"
+                        placeholder="Enter your occupation"
+                        className="input input-bordered"
+                        id='occupation'
+                        value={values.occupation}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                    />
                 </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text">Address</span>
                     </label>
-                    <textarea type="text" placeholder="Enter your address" className="input input-bordered py-2 max-h-24" />
+                    <textarea
+                        type="text"
+                        placeholder="Enter your address"
+                        className="input input-bordered py-2 max-h-24"
+                        id='location'
+                        value={values.location}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                    />
                 </div>
-                <Dropzone onDrop={acceptedFiles => console.log(acceptedFiles)}>
-                    {({ getRootProps, getInputProps }) => (
-                        <>
-                            <label className="label">
-                                <span className="label-text">Photo</span>
-                            </label>
-                            <section className='w-full rounded-md border border-dashed border-neutral-300 text-center p-5'>
-                                <div {...getRootProps()}>
-                                    <input {...getInputProps()} />
-                                    <p>Drag & drop file here, or click to select file</p>
-                                </div>
-                            </section>
-                        </>
-                    )}
-                </Dropzone>
+
+                <div>
+                    <label className="label">
+                        <span className="label-text">Photo</span>
+                    </label>
+                    <section className={
+                        isDragActive ? 'w-full rounded-md border-2 border-dashed border-primary text-center p-5'
+                            :
+                            'w-full rounded-md border border-dashed border-neutral-300 text-center p-5'
+                    }>
+                        <div {...getRootProps()}>
+                            <input {...getInputProps()} />
+                            <p>{acceptedFiles[0] ? acceptedFiles[0].path : "Drag 'n' drop some files here, or click to select files"}</p>
+                        </div>
+                    </section>
+                </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text">Email</span>
                     </label>
-                    <input type="text" placeholder="email" className="input input-bordered" />
+                    <input
+                        type="text"
+                        placeholder="email"
+                        className="input input-bordered"
+                        id='email'
+                        value={values.email}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                    />
+                    {errors.email && touched.email && <p className='text-error text-xs py-1'>{errors.email}</p>}
                 </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text">Password</span>
                     </label>
-                    <input type="password" placeholder="password" className="input input-bordered" />
+                    <input
+                        type="password"
+                        placeholder="password"
+                        className="input input-bordered"
+                        id='password'
+                        value={values.password}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                    />
+                    {errors.password && touched.password && <p className='text-error text-xs py-1'>{errors.password}</p>}
                 </div>
                 <div className="form-control mt-6">
-                    <button className="btn btn-primary">Login</button>
+                    <button className="btn btn-primary">Signup</button>
                 </div>
                 <div className='pt-2 text-sm font-semibold text-neutral-700'>
                     Already registered? <Link className=' text-primary hover:underline' to='/' >Login</Link>
