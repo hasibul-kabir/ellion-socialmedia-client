@@ -8,7 +8,7 @@ const LoginForm = () => {
         email: '',
         password: ''
     }
-    const { values, errors, handleSubmit, handleChange, handleBlur, touched, resetForm } = useFormik({
+    const { values, errors, handleSubmit, handleChange, handleBlur, touched } = useFormik({
         initialValues: initialValues,
         validationSchema: loginSchema,
         onSubmit: (values, action) => {
