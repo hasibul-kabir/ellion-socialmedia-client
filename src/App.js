@@ -5,17 +5,19 @@ import EditProfile from "./pages/EditProfile";
 import Login from "./pages/Login";
 import Registration from "./pages/Registration";
 import useCheckAuth from "./hooks/useCheckAuth";
+import PrivateRoute from "./routeAccess/PrivateRoute";
+import PublicRoute from "./routeAccess/PublicRoute";
 
 
 function App() {
   const checkAuthentication = useCheckAuth();
   return checkAuthentication ? (
     <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/registration" element={<Registration />} />
-      <Route path="/feed" element={<Home />} />
-      <Route path="/profile/:Id" element={<Profile />} />
-      <Route path="/profile/:Id/edit" element={<EditProfile />} />
+      <Route path="/" element={<PublicRoute><Login /></PublicRoute>} />
+      <Route path="/registration" element={<PublicRoute><Registration /></PublicRoute>} />
+      <Route path="/feed" element={<PrivateRoute> <Home /> </PrivateRoute>} />
+      <Route path="/profile/:Id" element={<PrivateRoute><Profile /></PrivateRoute>} />
+      <Route path="/profile/:Id/edit" element={<PrivateRoute><EditProfile /></PrivateRoute>} />
     </Routes>
 
   ) :
