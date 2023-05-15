@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom'
 import { loginSchema } from '../../form-validations/loginValidation'
 import { useFormik } from 'formik'
 
-const LoginForm = () => {
+const LoginForm = ({ login, isLoading }) => {
+
     const initialValues = {
         email: '',
         password: ''
@@ -12,10 +13,11 @@ const LoginForm = () => {
         initialValues: initialValues,
         validationSchema: loginSchema,
         onSubmit: (values, action) => {
-            console.log({ ...values });
+            login({ ...values })
             action.resetForm();
         }
     })
+
     return (
         <div className="card-body">
             <form onSubmit={handleSubmit}>
@@ -48,12 +50,17 @@ const LoginForm = () => {
                         onBlur={handleBlur}
                     />
                     {errors.password && touched.password && <p className='text-error text-xs py-1'>{errors.password}</p>}
-                    <label className="label">
+                    {/* <label className="label">
                         <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
-                    </label>
+                    </label> */}
                 </div>
                 <div className="form-control mt-6">
-                    <button className="btn btn-primary">Login</button>
+                    {
+                        isLoading ?
+                            <button className="btn btn-primary" disabled>Loading...</button>
+                            :
+                            <button className="btn btn-primary">Login</button>
+                    }
                 </div>
                 <div className='pt-2 text-sm font-semibold text-neutral-700'>
                     Not have an account? <Link className=' text-primary hover:underline' to='/registration' >Register</Link>

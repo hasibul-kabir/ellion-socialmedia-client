@@ -28,7 +28,6 @@ export const authApi = apiSlice.injectEndpoints({
                             user: result.data.user
                         })
                     )
-
                     //set data to redux
                     dispatch(userLoggedIn({
                         token: result.data.token,
