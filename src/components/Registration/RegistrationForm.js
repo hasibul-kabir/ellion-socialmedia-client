@@ -4,8 +4,9 @@ import { useDropzone } from 'react-dropzone'
 import { useFormik } from 'formik'
 import { signupSchema } from '../../form-validations/signupValidation'
 
-const RegistrationForm = () => {
+const RegistrationForm = ({ register, isLoading }) => {
 
+    const formData = new FormData();
     const initialValues = {
         firstName: '',
         lastName: '',
@@ -17,11 +18,17 @@ const RegistrationForm = () => {
 
     const { getRootProps, getInputProps, isDragActive, acceptedFiles } = useDropzone();
 
+
     const { values, errors, handleSubmit, handleChange, handleBlur, touched } = useFormik({
         initialValues: initialValues,
         validationSchema: signupSchema,
         onSubmit: (values) => {
-            console.log({ ...values, picturePath: acceptedFiles[0] });
+            for (let value in values) {
+                formData.append(value, values[value])
+            }
+            formData.append("picture", acceptedFiles[0])
+
+            register(formData)
         }
     })
 
@@ -140,7 +147,12 @@ const RegistrationForm = () => {
                     {errors.password && touched.password && <p className='text-error text-xs py-1'>{errors.password}</p>}
                 </div>
                 <div className="form-control mt-6">
-                    <button className="btn btn-primary">Signup</button>
+                    {
+                        isLoading ?
+                            <button className="btn btn-primary" disabled >Loading...</button>
+                            :
+                            <button className="btn btn-primary">Signup</button>
+                    }
                 </div>
                 <div className='pt-2 text-sm font-semibold text-neutral-700'>
                     Already registered? <Link className=' text-primary hover:underline' to='/' >Login</Link>
