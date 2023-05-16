@@ -12,11 +12,14 @@ const Login = () => {
     useEffect(() => {
         if (!isLoading && isError) {
             toast.error(error?.data?.message)
+            if (error?.status === "FETCH_ERROR") {
+                toast.error("Network Error")
+            }
         }
         if (isSuccess && data) {
             navigate('/feed')
         }
-    }, [isError, isLoading, isSuccess, data])
+    }, [isError, isLoading, isSuccess, data, error])
 
     return (
         <div className=' p-5 grid grid-cols-1 md:grid-cols-8 gap-4'>

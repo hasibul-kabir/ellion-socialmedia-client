@@ -14,7 +14,6 @@ const LoginForm = ({ login, isLoading }) => {
         validationSchema: loginSchema,
         onSubmit: (values, action) => {
             login({ ...values })
-            action.resetForm();
         }
     })
 

@@ -1,7 +1,18 @@
 import React from 'react'
-import profile from '../../assets/images/profile.jpg'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom';
+import { userLoggedOut } from '../../RTK/features/auth/authSlice';
 
 const Navbar = () => {
+    const dispatch = useDispatch();
+    const { user } = useSelector((state) => state.auth);
+    const { _id, firstName, lastName, email, picturePath } = user || {};
+
+    //logout
+    const handleLogout = () => {
+        dispatch(userLoggedOut());
+        localStorage.removeItem("auth");
+    }
     return (
         <div className="navbar bg-base-200 md:px-10 sticky top-0 z-50">
             <div className="flex-1 md:gap-5">
@@ -20,18 +31,18 @@ const Navbar = () => {
                 <div className="dropdown dropdown-end">
                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                         <div className="w-8 md:w-10 rounded-full">
-                            <img src={profile} alt='profile-avatar' />
+                            <img src={`${process.env.REACT_APP_API_IMGPATH}/${picturePath}`} alt={picturePath} />
                         </div>
                     </label>
                     <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
                         <li>
-                            <a className="justify-between">
+                            <Link className="justify-between">
                                 Profile
-                                <span className="badge">New</span>
-                            </a>
+                                {/* <span className="badge">New</span> */}
+                            </Link>
                         </li>
                         <li><a>Settings</a></li>
-                        <li><a>Logout</a></li>
+                        <li><Link onClick={handleLogout}>Logout</Link></li>
                     </ul>
                 </div>
             </div>
