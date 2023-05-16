@@ -1,18 +1,20 @@
 import React from 'react';
-import avatar from "../../../assets/images/profile.jpg"
+import avatar from "../../../assets/images/Profile_avatar.png";
 
 import { BsFillImageFill } from 'react-icons/bs';
 import { BsFillCameraVideoFill } from 'react-icons/bs';
 import PostInputModal from './PostInputModal';
+import Skeleton from 'react-loading-skeleton';
 
-const CreatePost = () => {
+const CreatePost = ({ isLoading, data }) => {
+    const { _id, email, picturePath } = data || {};
     return (
         <>
             <div className="bg-base-100 rounded-md mb-5 px-4">
                 <div className="flex gap-x-4 py-5 items-center">
                     <div className="avatar">
                         <div className="w-10 h-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                            <img src={avatar} alt='avatar' />
+                            <img src={isLoading ? <Skeleton /> : picturePath ? `${process.env.REACT_APP_API_IMGPATH}/${picturePath}` : avatar} alt='avatar' />
                         </div>
                     </div>
                     <label htmlFor="createpost-modal" className='w-full'>
