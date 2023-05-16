@@ -6,7 +6,7 @@ import { userLoggedOut } from '../../RTK/features/auth/authSlice';
 const Navbar = () => {
     const dispatch = useDispatch();
     const { user } = useSelector((state) => state.auth);
-    const { _id, firstName, lastName, email, picturePath } = user || {};
+    const { _id, picturePath } = user || {};
 
     //logout
     const handleLogout = () => {
@@ -36,7 +36,7 @@ const Navbar = () => {
                     </label>
                     <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
                         <li>
-                            <Link className="justify-between">
+                            <Link className="justify-between" to={`/profile/${_id}`}>
                                 Profile
                                 {/* <span className="badge">New</span> */}
                             </Link>
