@@ -21,7 +21,7 @@ const ProfileStatus = ({ isLoading, data }) => {
                     </div>
                 </div>
                 <h5 className=' text-lg font-bold text-neutral-700'>{isLoading ? <Skeleton /> : data && `${firstName} ${lastName}`}</h5>
-                <p className='text-xs text-neutral-600 font-medium'>{isLoading ? <Skeleton /> : data && friends.length} friends</p>
+                <p className='text-xs text-neutral-600 font-medium'>{isLoading ? <Skeleton /> : data && friends?.length > 1 ? `${friends?.length} friends` : `${friends?.length} friend`}</p>
 
                 {
                     //add|remove friend & message buttons

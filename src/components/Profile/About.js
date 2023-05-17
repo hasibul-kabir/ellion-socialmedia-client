@@ -3,7 +3,7 @@ import { BsGithub, BsLinkedin } from 'react-icons/bs'
 import { FaUserEdit } from 'react-icons/fa'
 import { HiLocationMarker } from 'react-icons/hi'
 import { MdWork } from 'react-icons/md'
-import Skeleton from 'react-loading-skeleton'
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import { useSelector } from 'react-redux'
 
 const About = ({ isLoading, data }) => {
@@ -15,7 +15,7 @@ const About = ({ isLoading, data }) => {
             <div className='py-3 flex justify-between items-center text-base text-neutral-800 font-bold'>
                 <h4>About</h4>
                 {
-                    user._id === _id &&
+                    user?._id === _id &&
                     <div className="tooltip" data-tip="Edit"> <FaUserEdit className='cursor-pointer' /> </div>
                 }
             </div>
@@ -23,8 +23,9 @@ const About = ({ isLoading, data }) => {
             <div className='flex items-center gap-x-2 py-2'>
                 {
                     isLoading ?
-                        <Skeleton /> :
-                        data &&
+                        <p className='text-sm w-full text-neutral-600'>{<Skeleton />}</p>
+                        :
+                        !isLoading && data &&
                         <>
                             <MdWork />
                             <p className='text-sm text-neutral-600'>{occupation}</p>
@@ -34,7 +35,7 @@ const About = ({ isLoading, data }) => {
             <div className='flex items-center gap-x-2 py-2'>
                 {
                     isLoading ?
-                        <Skeleton /> :
+                        <p className='text-sm w-full text-neutral-600'>{<Skeleton />}</p> :
                         data &&
                         <>
                             <HiLocationMarker />

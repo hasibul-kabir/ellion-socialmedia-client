@@ -47,7 +47,7 @@ const Profile = () => {
                 user?._id === data?._id &&
                 <CreatePost user={user} />
             }
-            <UserPosts userId={data._id} />
+            <UserPosts userId={data?._id} />
         </div>
         <div className='hidden md:block'>
         </div>

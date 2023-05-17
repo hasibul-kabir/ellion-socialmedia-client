@@ -3,12 +3,22 @@ import { apiSlice } from "../api/apiSlice";
 export const postApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getUserPosts: builder.query({
-            query: (userId) => `/posts/${userId}/posts`
+            query: (userId) => `/posts/${userId}/posts`,
+            providesTags: ['Post']
         }),
         getAllPosts: builder.query({
-            query: () => `/posts`
+            query: () => `/posts`,
+            providesTags: ['Post']
+        }),
+        createPost: builder.mutation({
+            query: (data) => ({
+                url: '/posts',
+                method: 'POST',
+                body: data
+            }),
+            invalidatesTags: ['Post']
         })
     })
 })
 
-export const { useGetUserPostsQuery, useGetAllPostsQuery } = postApi;
+export const { useGetUserPostsQuery, useGetAllPostsQuery, useCreatePostMutation } = postApi;

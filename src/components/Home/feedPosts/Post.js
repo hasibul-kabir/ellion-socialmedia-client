@@ -7,12 +7,19 @@ import { BsThreeDots } from 'react-icons/bs';
 import EditPostModal from './EditPostModal';
 import Skeleton from 'react-loading-skeleton';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 
 const Post = ({ isLoading, post }) => {
+    const navigate = useNavigate();
     const { user: currUser } = useSelector((state) => state?.auth);
     const { _id, user, description, picturePath, likes, comments, createdAt, updatedAt } = post || {};
     let date = new Date(createdAt).toDateString();
+
+    //redirect to user profile
+    const handleRedirect = () => {
+        navigate(`/profile/${user?._id}`)
+    }
 
     return (
         <>
@@ -27,7 +34,7 @@ const Post = ({ isLoading, post }) => {
                             </div>
                         </div>
                         <div>
-                            <div className="font-bold cursor-pointer">{isLoading ? <Skeleton /> : post && `${user?.firstName} ${user?.lastName} `}</div>
+                            <div className="font-bold cursor-pointer" onClick={handleRedirect} >{isLoading ? <Skeleton /> : post && `${user?.firstName} ${user?.lastName} `}</div>
                             <div className="text-sm opacity-50">{isLoading ? <Skeleton /> : post && date.slice(4)}</div>
                         </div>
                     </div>

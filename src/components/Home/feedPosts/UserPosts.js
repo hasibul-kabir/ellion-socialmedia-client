@@ -10,7 +10,7 @@ const UserPosts = ({ userId }) => {
     if (isLoading) content = <Post isLoading={isLoading} />
     if (!isLoading && isError) content = <Error errorMessage={error?.error ? error?.error : error?.data && error?.data?.message} />
     if (!isLoading && !isError && isSuccess && !data.length) content = <Error errorMessage={'No post here'} />
-    if (!isLoading && !isError && isSuccess && data.length > 0) content = data.map((post) => <Post post={post} />)
+    if (!isLoading && !isError && isSuccess && data.length > 0) content = data.map((post, index) => <Post key={index} post={post} />)
     return (
         <div className='post flex flex-col gap-y-2'>
             {content}
