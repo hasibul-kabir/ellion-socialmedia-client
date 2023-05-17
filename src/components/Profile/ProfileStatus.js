@@ -1,5 +1,4 @@
 import React from 'react'
-import avatar from '../../assets/images/Profile_avatar.png'
 import Skeleton from 'react-loading-skeleton'
 
 
@@ -18,7 +17,7 @@ const ProfileStatus = ({ isLoading, data }) => {
             <div className='text-center py-5'>
                 <div className="avatar">
                     <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                        <img src={isLoading ? <Skeleton /> : data && picturePath ? `${process.env.REACT_APP_API_IMGPATH}/${picturePath}` : avatar} alt='profile-image' />
+                        <img src={isLoading ? <Skeleton /> : data && picturePath && `${process.env.REACT_APP_API_IMGPATH}/${picturePath}`} alt='profile-image' />
                     </div>
                 </div>
                 <h5 className=' text-lg font-bold text-neutral-700'>{isLoading ? <Skeleton /> : data && `${firstName} ${lastName}`}</h5>

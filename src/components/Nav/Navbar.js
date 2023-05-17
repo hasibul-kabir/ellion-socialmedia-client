@@ -16,7 +16,7 @@ const Navbar = () => {
     return (
         <div className="navbar bg-base-200 md:px-10 sticky top-0 z-50">
             <div className="flex-1 md:gap-5">
-                <a className="btn btn-ghost normal-case text-xl">Ellion</a>
+                <Link to='/feed' className="btn btn-ghost normal-case text-xl">Ellion</Link>
                 <div className="form-control">
                     <input type="text" placeholder="Search" className="px-5 py-3 focus:outline-none rounded-xl w-11/12 md:w-full text-neutral-600 font-normal" />
                 </div>
