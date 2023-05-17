@@ -6,9 +6,11 @@ import { AiOutlineLike, AiTwotoneLike } from 'react-icons/ai';
 import { BsThreeDots } from 'react-icons/bs';
 import EditPostModal from './EditPostModal';
 import Skeleton from 'react-loading-skeleton';
+import { useSelector } from 'react-redux';
 
 
 const Post = ({ isLoading, post }) => {
+    const { user: currUser } = useSelector((state) => state?.auth);
     const { _id, user, description, picturePath, likes, comments, createdAt, updatedAt } = post || {};
     let date = new Date(createdAt).toDateString();
 
@@ -25,20 +27,23 @@ const Post = ({ isLoading, post }) => {
                             </div>
                         </div>
                         <div>
-                            <div className="font-bold">{isLoading ? <Skeleton /> : post && `${user?.firstName} ${user?.lastName} `}</div>
+                            <div className="font-bold cursor-pointer">{isLoading ? <Skeleton /> : post && `${user?.firstName} ${user?.lastName} `}</div>
                             <div className="text-sm opacity-50">{isLoading ? <Skeleton /> : post && date.slice(4)}</div>
                         </div>
                     </div>
 
-                    <div className="dropdown dropdown-bottom dropdown-end">
-                        <label tabIndex={0}>
-                            <BsThreeDots className='text-xl cursor-pointer' />
-                        </label>
-                        <ul tabIndex={0} className="dropdown-content menu p-2 shadow-xl bg-base-200 rounded-md w-52">
-                            <label className='p-2 rounded-md hover:bg-base-100 font-semibold text-neutral-700 cursor-pointer' htmlFor='editpost-modal' >Edit Post</label>
-                            <label className='p-2 rounded-md hover:bg-base-100 font-semibold text-neutral-700 cursor-pointer' >Delete Post</label>
-                        </ul>
-                    </div>
+                    {
+                        currUser?._id === user?._id &&
+                        <div className="dropdown dropdown-bottom dropdown-end">
+                            <label tabIndex={0}>
+                                <BsThreeDots className='text-xl cursor-pointer' />
+                            </label>
+                            <ul tabIndex={0} className="dropdown-content menu p-2 shadow-xl bg-base-200 rounded-md w-52">
+                                <label className='p-2 rounded-md hover:bg-base-100 font-semibold text-neutral-700 cursor-pointer' htmlFor='editpost-modal' >Edit Post</label>
+                                <label className='p-2 rounded-md hover:bg-base-100 font-semibold text-neutral-700 cursor-pointer' >Delete Post</label>
+                            </ul>
+                        </div>
+                    }
 
                 </div>
                 {/* author */}

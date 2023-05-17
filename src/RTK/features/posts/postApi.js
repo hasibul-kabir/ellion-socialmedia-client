@@ -4,8 +4,11 @@ export const postApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getUserPosts: builder.query({
             query: (userId) => `/posts/${userId}/posts`
+        }),
+        getAllPosts: builder.query({
+            query: () => `/posts`
         })
     })
 })
 
-export const { useGetUserPostsQuery } = postApi;
+export const { useGetUserPostsQuery, useGetAllPostsQuery } = postApi;
