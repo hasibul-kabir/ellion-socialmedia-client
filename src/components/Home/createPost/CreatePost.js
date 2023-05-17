@@ -60,7 +60,7 @@ const CreatePost = ({ isLoading, user }) => {
                 pauseOnHover
                 theme="light"
             />
-            <PostInputModal open={open} setOpen={setOpen} isLoading={posting} createPost={createPost} />
+            <PostInputModal open={open} setOpen={setOpen} isLoading={posting} createPost={createPost} isSuccess={isSuccess} />
         </>
     )
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import CommentsModal from './CommentsModal';
 
 import { BiCommentDetail } from 'react-icons/bi';
@@ -8,6 +8,8 @@ import EditPostModal from './EditPostModal';
 import Skeleton from 'react-loading-skeleton';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useDeletePostMutation } from '../../../RTK/features/posts/postApi';
+import { toast } from 'react-toastify';
 
 
 const Post = ({ isLoading, post }) => {
@@ -20,6 +22,23 @@ const Post = ({ isLoading, post }) => {
     const handleRedirect = () => {
         navigate(`/profile/${user?._id}`)
     }
+
+    //delete post
+    const [deletePost, { isLoading: deleting, isError, error, isSuccess, data }] = useDeletePostMutation();
+
+    useEffect(() => {
+        if (!deleting && isError) {
+            toast.error(error?.data?.message)
+            if (error?.status === "FETCH_ERROR") {
+                toast.error("Network Error")
+            }
+        }
+        if (isSuccess && data) {
+            toast(data?.message)
+        }
+    }, [isError, deleting, isSuccess, data, error])
+    //
+
 
     return (
         <>
@@ -47,7 +66,12 @@ const Post = ({ isLoading, post }) => {
                             </label>
                             <ul tabIndex={0} className="dropdown-content menu p-2 shadow-xl bg-base-200 rounded-md w-52">
                                 <label className='p-2 rounded-md hover:bg-base-100 font-semibold text-neutral-700 cursor-pointer' htmlFor='editpost-modal' >Edit Post</label>
-                                <label className='p-2 rounded-md hover:bg-base-100 font-semibold text-neutral-700 cursor-pointer' >Delete Post</label>
+                                {
+                                    deleting ?
+                                        <label className='p-2 rounded-md hover:bg-base-100 font-semibold text-neutral-700 cursor-pointer' >Deleting...</label>
+                                        :
+                                        <label className='p-2 rounded-md hover:bg-base-100 font-semibold text-neutral-700 cursor-pointer' onClick={() => deletePost(_id)} >Delete Post</label>
+                                }
                             </ul>
                         </div>
                     }

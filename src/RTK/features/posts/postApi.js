@@ -17,8 +17,15 @@ export const postApi = apiSlice.injectEndpoints({
                 body: data
             }),
             invalidatesTags: ['Post']
+        }),
+        deletePost: builder.mutation({
+            query: (id) => ({
+                url: `/posts/${id}/delete`,
+                method: "DELETE"
+            }),
+            invalidatesTags: ['Post']
         })
     })
 })
 
-export const { useGetUserPostsQuery, useGetAllPostsQuery, useCreatePostMutation } = postApi;
+export const { useGetUserPostsQuery, useGetAllPostsQuery, useCreatePostMutation, useDeletePostMutation } = postApi;

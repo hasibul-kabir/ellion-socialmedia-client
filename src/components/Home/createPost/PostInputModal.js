@@ -1,12 +1,11 @@
-import { useFormik } from 'formik';
 import React, { useEffect } from 'react'
+import { useFormik } from 'formik';
 import { useDropzone } from 'react-dropzone';
 import { postSchema } from '../../../form-validations/postInputValidation';
 import { useSelector } from 'react-redux';
-// import { useCreatePostMutation } from '../../../RTK/features/posts/postApi';
-// import { toast } from 'react-toastify';
 
-const PostInputModal = ({ open, setOpen, isLoading, createPost }) => {
+
+const PostInputModal = ({ open, setOpen, isLoading, createPost, isSuccess: postCreated }) => {
 
     const { user } = useSelector((state) => state.auth);
 
@@ -17,7 +16,7 @@ const PostInputModal = ({ open, setOpen, isLoading, createPost }) => {
     }
     const { getRootProps, getInputProps, isDragActive, acceptedFiles } = useDropzone();
 
-    const { values, errors, handleSubmit, handleChange, handleBlur, touched } = useFormik({
+    const { values, errors, handleSubmit, handleChange, handleBlur, touched, resetForm } = useFormik({
         initialValues: initialValues,
         validationSchema: postSchema,
         onSubmit: (values) => {
@@ -30,6 +29,14 @@ const PostInputModal = ({ open, setOpen, isLoading, createPost }) => {
             createPost(formData);
         }
     })
+
+    //reset
+    useEffect(() => {
+        if (postCreated) {
+            resetForm()
+            acceptedFiles.length = 0
+        }
+    }, [postCreated])
 
 
 
