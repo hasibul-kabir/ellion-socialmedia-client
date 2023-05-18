@@ -14,7 +14,13 @@ const PostInputModal = ({ open, setOpen, isLoading, createPost, isSuccess: postC
     const initialValues = {
         description: ''
     }
-    const { getRootProps, getInputProps, isDragActive, acceptedFiles } = useDropzone();
+    const { getRootProps, getInputProps, isDragActive, acceptedFiles } = useDropzone({
+        accept: {
+            'image/jpeg': ['.jpeg'],
+            'image/jpg': ['.jpg'],
+            'image/png': ['.png']
+        }
+    });
 
     const { values, errors, handleSubmit, handleChange, handleBlur, touched, resetForm } = useFormik({
         initialValues: initialValues,
@@ -68,6 +74,7 @@ const PostInputModal = ({ open, setOpen, isLoading, createPost, isSuccess: postC
                                 <div {...getRootProps()}>
                                     <input {...getInputProps()} />
                                     <p>{acceptedFiles[0] ? acceptedFiles[0].path : "Drag 'n' drop some files here, or click to select files"}</p>
+                                    <em>{!acceptedFiles[0] && "(Only *.jpeg and *.png images will be accepted)"}</em>
                                 </div>
                             </section>
                             {
