@@ -10,6 +10,10 @@ export const postApi = apiSlice.injectEndpoints({
             query: () => `/posts`,
             providesTags: ['Post']
         }),
+        getSinglePost: builder.query({
+            query: (id) => `/posts/${id}`,
+            providesTags: ['SelectedPost']
+        }),
         createPost: builder.mutation({
             query: (data) => ({
                 url: '/posts',
@@ -17,6 +21,14 @@ export const postApi = apiSlice.injectEndpoints({
                 body: data
             }),
             invalidatesTags: ['Post']
+        }),
+        updatePost: builder.mutation({
+            query: ({ id, data }) => ({
+                url: `/posts/${id}/update`,
+                method: 'PATCH',
+                body: data
+            }),
+            invalidatesTags: ['Post', 'SelectedPost']
         }),
         deletePost: builder.mutation({
             query: (id) => ({
@@ -28,4 +40,4 @@ export const postApi = apiSlice.injectEndpoints({
     })
 })
 
-export const { useGetUserPostsQuery, useGetAllPostsQuery, useCreatePostMutation, useDeletePostMutation } = postApi;
+export const { useGetUserPostsQuery, useGetAllPostsQuery, useGetSinglePostQuery, useCreatePostMutation, useUpdatePostMutation, useDeletePostMutation } = postApi;

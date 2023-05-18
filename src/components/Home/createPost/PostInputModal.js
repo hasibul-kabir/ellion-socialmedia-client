@@ -51,7 +51,6 @@ const PostInputModal = ({ open, setOpen, isLoading, createPost, isSuccess: postC
             <input checked={open} type="checkbox" id="createpost-modal" className="modal-toggle" />
             <div className="modal">
                 <div className="modal-box relative overflow-y-hidden">
-                    {/* <label htmlFor="createpost-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label> */}
                     <label className="btn btn-sm btn-circle absolute right-2 top-2" onClick={() => setOpen(false)}>✕</label>
                     <h3 className="text-lg text-center font-bold">Create Post</h3>
 

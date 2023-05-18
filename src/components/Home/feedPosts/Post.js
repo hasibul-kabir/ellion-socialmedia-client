@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import CommentsModal from './CommentsModal';
 
 import { BiCommentDetail } from 'react-icons/bi';
@@ -13,6 +13,7 @@ import { toast } from 'react-toastify';
 
 
 const Post = ({ isLoading, post }) => {
+    const [open, setOpen] = useState(false);
     const navigate = useNavigate();
     const { user: currUser } = useSelector((state) => state?.auth);
     const { _id, user, description, picturePath, likes, comments, createdAt, updatedAt } = post || {};
@@ -22,10 +23,12 @@ const Post = ({ isLoading, post }) => {
     const handleRedirect = () => {
         navigate(`/profile/${user?._id}`)
     }
+    //
+
+    //catch this post to update
 
     //delete post
     const [deletePost, { isLoading: deleting, isError, error, isSuccess, data }] = useDeletePostMutation();
-
     useEffect(() => {
         if (!deleting && isError) {
             toast.error(error?.data?.message)
@@ -38,7 +41,6 @@ const Post = ({ isLoading, post }) => {
         }
     }, [isError, deleting, isSuccess, data, error])
     //
-
 
     return (
         <>
@@ -65,7 +67,7 @@ const Post = ({ isLoading, post }) => {
                                 <BsThreeDots className='text-xl cursor-pointer' />
                             </label>
                             <ul tabIndex={0} className="dropdown-content menu p-2 shadow-xl bg-base-200 rounded-md w-52">
-                                <label className='p-2 rounded-md hover:bg-base-100 font-semibold text-neutral-700 cursor-pointer' htmlFor='editpost-modal' >Edit Post</label>
+                                <label className='p-2 rounded-md hover:bg-base-100 font-semibold text-neutral-700 cursor-pointer' onClick={() => setOpen(true)} >Edit Post</label>
                                 {
                                     deleting ?
                                         <label className='p-2 rounded-md hover:bg-base-100 font-semibold text-neutral-700 cursor-pointer' >Deleting...</label>
@@ -105,7 +107,7 @@ const Post = ({ isLoading, post }) => {
 
             {/* modals */}
             <CommentsModal />
-            <EditPostModal />
+            <EditPostModal open={open} setOpen={setOpen} id={open && post?._id} />
         </>
     )
 }
