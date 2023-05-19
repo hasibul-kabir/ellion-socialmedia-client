@@ -30,14 +30,31 @@ export const postApi = apiSlice.injectEndpoints({
             }),
             invalidatesTags: ['Post', 'SelectedPost']
         }),
+        likePost: builder.mutation({
+            query: ({ id, userId }) => ({
+                url: `/posts/${id}/like`,
+                method: 'PATCH',
+                body: userId
+            })
+        }),
+
+        commentPost: builder.mutation({
+            query: ({ id, data }) => ({
+                url: `/posts/${id}/comment`,
+                method: 'PATCH',
+                body: data
+            }),
+            invalidatesTags: ['Post']
+        }),
+
         deletePost: builder.mutation({
             query: (id) => ({
                 url: `/posts/${id}/delete`,
-                method: "DELETE"
+                method: "DELETE",
             }),
             invalidatesTags: ['Post']
         })
     })
 })
 
-export const { useGetUserPostsQuery, useGetAllPostsQuery, useGetSinglePostQuery, useCreatePostMutation, useUpdatePostMutation, useDeletePostMutation } = postApi;
+export const { useGetUserPostsQuery, useGetAllPostsQuery, useGetSinglePostQuery, useCreatePostMutation, useUpdatePostMutation, useLikePostMutation, useCommentPostMutation, useDeletePostMutation } = postApi;

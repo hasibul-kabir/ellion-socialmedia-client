@@ -8,15 +8,17 @@ import EditPostModal from './EditPostModal';
 import Skeleton from 'react-loading-skeleton';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useDeletePostMutation } from '../../../RTK/features/posts/postApi';
+import { useDeletePostMutation, useLikePostMutation } from '../../../RTK/features/posts/postApi';
 import { toast } from 'react-toastify';
 
 
 const Post = ({ isLoading, post }) => {
-    const [open, setOpen] = useState(false);
     const navigate = useNavigate();
+    const [open, setOpen] = useState(false);
+    const [commentsOpen, setCommentsOpen] = useState(false);
     const { user: currUser } = useSelector((state) => state?.auth);
-    const { _id, user, description, picturePath, likes, comments, createdAt, updatedAt } = post || {};
+    const { _id, user, description, picturePath, likes, comments, createdAt, updatedAt } = post || {}; //render post data
+
     let date = new Date(createdAt).toDateString();
 
     //redirect to user profile
@@ -25,7 +27,13 @@ const Post = ({ isLoading, post }) => {
     }
     //
 
-    //catch this post to update
+    //Like|remove-Like post
+    const [likePost, { isLoading: likeLoading, isError: likeError, isSuccess: likeSuccess, error: likeErr }] = useLikePostMutation()
+    const handleLike = () => {
+        likePost({ id: _id, userId: currUser._id })
+    }
+    //
+
 
     //delete post
     const [deletePost, { isLoading: deleting, isError, error, isSuccess, data }] = useDeletePostMutation();
@@ -97,8 +105,21 @@ const Post = ({ isLoading, post }) => {
                 {
                     !isLoading && post &&
                     <div className='flex items-center gap-x-5 py-2 text-2xl'>
-                        <div className='flex items-center'><AiTwotoneLike className='cursor-pointer' /><span className='text-base px-1'>{likes && likes.length}</span></div>
-                        <div className='flex items-center'> <label htmlFor="comments-modal"><BiCommentDetail className='cursor-pointer' /></label><span className='text-base px-1'>{!isLoading && comments && comments.length}</span></div>
+                        <div className='flex items-center'>
+                            {
+                                likes[`${currUser?._id}`] === true ?
+                                    <AiTwotoneLike className='cursor-pointer' onClick={handleLike} />
+                                    :
+                                    <AiOutlineLike className='cursor-pointer' onClick={handleLike} />
+                            }
+                            <span className='text-base px-1'>{likes && Object.keys(likes).length}</span>
+                        </div>
+                        <div className='flex items-center'> <label><BiCommentDetail className='cursor-pointer'
+                            onClick={() => setCommentsOpen(true)}
+                        />
+                        </label>
+                            <span className='text-base px-1'>{!isLoading && comments && comments.length}</span>
+                        </div>
                     </div>
                 }
                 {/* post reactions */}
@@ -106,7 +127,7 @@ const Post = ({ isLoading, post }) => {
             </div>
 
             {/* modals */}
-            <CommentsModal />
+            <CommentsModal open={commentsOpen} setOpen={setCommentsOpen} id={_id} />
             <EditPostModal open={open} setOpen={setOpen} id={open && post?._id} />
         </>
     )
