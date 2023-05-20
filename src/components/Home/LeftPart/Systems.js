@@ -19,14 +19,9 @@ const Systems = ({ user }) => {
                     <div className="p-3 rounded-full bg-basic ">
                         <FaUserFriends />
                     </div>
-                    <p className='text-base text-neutral-800 font-semibold'>Friends</p>
+                    <p className='text-base text-neutral-800 font-semibold'>People</p>
                 </div>
-                <div className='flex items-center gap-x-2 w-full rounded-md p-2 cursor-pointer hover:bg-basic'>
-                    <div className="p-3 rounded-full bg-basic ">
-                        <MdGroups />
-                    </div>
-                    <p className='text-base text-neutral-800 font-semibold'>Groups</p>
-                </div>
+
                 <div className='flex items-center gap-x-2 w-full rounded-md p-2 cursor-pointer hover:bg-basic'>
                     <div className="p-3 rounded-full bg-basic ">
                         <AiOutlineFieldTime />

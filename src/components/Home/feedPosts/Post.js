@@ -108,7 +108,7 @@ const Post = ({ isLoading, post }) => {
                     <div className='flex items-center gap-x-5 py-2 text-2xl'>
                         <div className='flex items-center'>
                             {
-                                likes.find((user) => user === currUser?._id) ?
+                                likes.includes(currUser?._id) ?
                                     <AiTwotoneLike className='cursor-pointer' onClick={handleLike} />
                                     :
                                     <AiOutlineLike className='cursor-pointer' onClick={handleLike} />
