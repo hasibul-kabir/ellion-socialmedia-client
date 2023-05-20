@@ -15,12 +15,12 @@ const Systems = ({ user }) => {
             </Link>
 
             <div className='mt-2 flex flex-col gap-y-1'>
-                <div className='flex items-center gap-x-2 w-full rounded-md p-2 cursor-pointer hover:bg-basic'>
+                <Link to='/people' className='flex items-center gap-x-2 w-full rounded-md p-2 cursor-pointer hover:bg-basic'>
                     <div className="p-3 rounded-full bg-basic ">
                         <FaUserFriends />
                     </div>
                     <p className='text-base text-neutral-800 font-semibold'>People</p>
-                </div>
+                </Link>
 
                 <div className='flex items-center gap-x-2 w-full rounded-md p-2 cursor-pointer hover:bg-basic'>
                     <div className="p-3 rounded-full bg-basic ">
