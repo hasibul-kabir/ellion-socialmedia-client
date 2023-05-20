@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 
 import { HiUserAdd, HiUserRemove } from 'react-icons/hi';
-import { ImSpinner } from 'react-icons/im';
 import About from './About';
 import { useSelector } from 'react-redux';
 import { useAddRemoveFriendMutation, useGetUserQuery } from '../../RTK/features/users/userApi';

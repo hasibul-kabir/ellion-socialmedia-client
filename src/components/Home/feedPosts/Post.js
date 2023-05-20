@@ -28,10 +28,9 @@ const Post = ({ isLoading, post }) => {
     //
 
     //Like|remove-Like post
-    const [likePost, { isLoading: likeLoading, isError: likeError, isSuccess: likeSuccess, error: likeErr }] = useLikePostMutation()
+    const [likePost, { isLoading: likeLoading }] = useLikePostMutation()
     const handleLike = () => {
         likePost({ id: _id, data: { userId: currUser._id } })
-        console.log(currUser._id);
     }
     //
 
