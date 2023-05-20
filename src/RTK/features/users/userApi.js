@@ -6,6 +6,14 @@ export const userApi = apiSlice.injectEndpoints({
             query: (id) => `/users/${id}`,
             providesTags: ['User']
         }),
+        editProfile: builder.mutation({
+            query: ({ id, data }) => ({
+                url: `/users/${id}/edit`,
+                method: 'PATCH',
+                body: data
+            }),
+            invalidatesTags: ['User']
+        }),
         getFriends: builder.query({
             query: (id) => `/users/${id}/friends`,
             providesTags: ['Friends']
@@ -20,4 +28,4 @@ export const userApi = apiSlice.injectEndpoints({
     })
 })
 
-export const { useGetUserQuery, useGetFriendsQuery, useAddRemoveFriendMutation } = userApi;
+export const { useGetUserQuery, useEditProfileMutation, useGetFriendsQuery, useAddRemoveFriendMutation } = userApi;

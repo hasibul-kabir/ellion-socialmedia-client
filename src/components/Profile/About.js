@@ -3,8 +3,9 @@ import { BsGithub, BsLinkedin } from 'react-icons/bs'
 import { FaUserEdit } from 'react-icons/fa'
 import { HiLocationMarker } from 'react-icons/hi'
 import { MdWork } from 'react-icons/md'
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+import Skeleton from 'react-loading-skeleton'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 const About = ({ isLoading, data }) => {
     const { user } = useSelector((state) => state.auth);
@@ -16,7 +17,7 @@ const About = ({ isLoading, data }) => {
                 <h4>About</h4>
                 {
                     user?._id === _id &&
-                    <div className="tooltip" data-tip="Edit"> <FaUserEdit className='cursor-pointer' /> </div>
+                    <Link to={`/profile/${user?._id}/edit`} className="tooltip" data-tip="Edit profile" > <FaUserEdit className='cursor-pointer' /> </Link>
                 }
             </div>
 
@@ -46,7 +47,7 @@ const About = ({ isLoading, data }) => {
 
             </div>
 
-            <h4 className='py-3 text-sm text-neutral-700 font-bold'>Social Links</h4>
+            {/* <h4 className='py-3 text-sm text-neutral-700 font-bold'>Social Links</h4>
 
             <div className='flex items-center gap-x-2 py-2'>
                 <BsLinkedin />
@@ -55,7 +56,7 @@ const About = ({ isLoading, data }) => {
             <div className='flex items-center gap-x-2 py-2'>
                 <BsGithub />
                 <p className='text-sm text-neutral-600'>myprofile</p>
-            </div>
+            </div> */}
         </div>
     )
 }
