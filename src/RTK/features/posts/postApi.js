@@ -31,11 +31,12 @@ export const postApi = apiSlice.injectEndpoints({
             invalidatesTags: ['Post', 'SelectedPost']
         }),
         likePost: builder.mutation({
-            query: ({ id, userId }) => ({
+            query: ({ id, data }) => ({
                 url: `/posts/${id}/like`,
                 method: 'PATCH',
-                body: userId
-            })
+                body: data
+            }),
+            invalidatesTags: ['Post']
         }),
 
         commentPost: builder.mutation({
@@ -44,7 +45,7 @@ export const postApi = apiSlice.injectEndpoints({
                 method: 'PATCH',
                 body: data
             }),
-            invalidatesTags: ['Post']
+            invalidatesTags: ['Post', 'SelectedPost']
         }),
 
         deletePost: builder.mutation({

@@ -30,7 +30,8 @@ const Post = ({ isLoading, post }) => {
     //Like|remove-Like post
     const [likePost, { isLoading: likeLoading, isError: likeError, isSuccess: likeSuccess, error: likeErr }] = useLikePostMutation()
     const handleLike = () => {
-        likePost({ id: _id, userId: currUser._id })
+        likePost({ id: _id, data: { userId: currUser._id } })
+        console.log(currUser._id);
     }
     //
 
@@ -107,12 +108,12 @@ const Post = ({ isLoading, post }) => {
                     <div className='flex items-center gap-x-5 py-2 text-2xl'>
                         <div className='flex items-center'>
                             {
-                                likes[`${currUser?._id}`] === true ?
+                                likes.find((user) => user === currUser?._id) ?
                                     <AiTwotoneLike className='cursor-pointer' onClick={handleLike} />
                                     :
                                     <AiOutlineLike className='cursor-pointer' onClick={handleLike} />
                             }
-                            <span className='text-base px-1'>{likes && Object.keys(likes).length}</span>
+                            <span className='text-base px-1'>{likes && likes.length - 1}</span>
                         </div>
                         <div className='flex items-center'> <label><BiCommentDetail className='cursor-pointer'
                             onClick={() => setCommentsOpen(true)}
