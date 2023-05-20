@@ -44,7 +44,6 @@ const RegistrationForm = ({ register, isLoading }) => {
     //     // console.log(acceptedFiles);
     // }, [])
 
-    // console.log(acceptedFiles[0]);
 
     return (
         <div className="card-body">

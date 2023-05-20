@@ -16,7 +16,7 @@ const People = () => {
     if (isLoading) content = <Skeleton />
     if (!isLoading && isError) content = <Error errorMessage={error?.error ? error?.error : error?.data && error?.data?.message} />
     if (!isLoading && !isError && isSuccess && !data.length) content = <Error errorMessage={'No post here'} />
-    if (!isLoading && !isError && isSuccess && data.length) content = exceptFriendAndme.map((user, index) => <ProfileCard key={index} user={user} />)
+    if (!isLoading && !isError && isSuccess && data.length) content = exceptFriendAndme.map((userInfo, index) => <ProfileCard key={index} userInfo={userInfo} />)
     return (
         <Layout>
             <div className='mx-5 md:mx-10 mt-5 grid md:grid-cols-8 grid-cols-2 md:gap-x-4 min-h-screen'>

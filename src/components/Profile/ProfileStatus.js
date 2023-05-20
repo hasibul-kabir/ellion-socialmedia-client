@@ -9,7 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 const ProfileStatus = ({ isLoading, data }) => {
     const { user } = useSelector((state) => state.auth);
-    const { _id, firstName, lastName, email, occupation, location, picturePath, friends } = data || {}; //selected profile
+    const { _id, firstName, lastName, picturePath, friends } = data || {}; //selected profile
     const { isLoading: userLoading, isError: userError, data: userData } = useGetUserQuery(user?._id); // my profile
     const [addRemoveFriend, { isLoading: addRemoveLoading, isError: isAddRemoveError, error: addRemoveError }] = useAddRemoveFriendMutation(); //add or remove connections dispatch
 
