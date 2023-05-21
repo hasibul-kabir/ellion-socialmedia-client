@@ -1,7 +1,7 @@
 import React from 'react'
 import EachUser from '../RightPart/EachUser'
 
-import { FaUserFriends } from 'react-icons/fa';
+import { IoIosPeople } from 'react-icons/io'
 import { MdGroups } from 'react-icons/md';
 import { AiOutlineFieldTime } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
@@ -17,7 +17,7 @@ const Systems = ({ user }) => {
             <div className='mt-2 flex flex-col gap-y-1'>
                 <Link to='/people' className='flex items-center gap-x-2 w-full rounded-md p-2 cursor-pointer hover:bg-basic'>
                     <div className="p-3 rounded-full bg-basic ">
-                        <FaUserFriends />
+                        <IoIosPeople />
                     </div>
                     <p className='text-base text-neutral-800 font-semibold'>People</p>
                 </Link>

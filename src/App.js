@@ -8,6 +8,7 @@ import useCheckAuth from "./hooks/useCheckAuth";
 import PrivateRoute from "./routeAccess/PrivateRoute";
 import PublicRoute from "./routeAccess/PublicRoute";
 import People from "./pages/People";
+import AllConnections from "./pages/AllConnections";
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
       <Route path="/registration" element={<PublicRoute><Registration /></PublicRoute>} />
       <Route path="/feed" element={<PrivateRoute> <Home /> </PrivateRoute>} />
       <Route path="/profile/:Id" element={<PrivateRoute><Profile /></PrivateRoute>} />
+      <Route path="/connections" element={<PrivateRoute><AllConnections /></PrivateRoute>} />
       <Route path="/people" element={<PrivateRoute><People /></PrivateRoute>} />
       <Route path="/profile/:Id/edit" element={<PrivateRoute><EditProfile /></PrivateRoute>} />
     </Routes>
