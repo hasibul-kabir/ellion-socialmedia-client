@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
 import { userLoggedOut } from '../../RTK/features/auth/authSlice';
+import Search from './Search';
 
 const Navbar = () => {
     const dispatch = useDispatch();
@@ -17,9 +18,9 @@ const Navbar = () => {
         <div className="navbar bg-base-200 md:px-10 sticky top-0 z-50">
             <div className="flex-1 md:gap-5">
                 <Link to='/feed' className="btn btn-ghost normal-case text-xl">Ellion</Link>
-                <div className="form-control">
-                    <input type="text" placeholder="Search" className="px-5 py-3 focus:outline-none rounded-xl w-11/12 md:w-full text-neutral-600 font-normal" />
-                </div>
+
+                <Search />
+
             </div>
             <div className="flex-none gap-2">
                 <button className="btn btn-ghost btn-circle w-8 md:w-12">
