@@ -10,7 +10,7 @@ const Contacts = ({ user }) => {
 
     let content;
     if (isLoading) content = <Skeleton />
-    if (!isLoading && isError) content = <div className='p-5 text-center text-base text-error font-bold'>{error?.error ? error?.error : error?.data && error?.data?.message}</div>
+    if (!isLoading && isError) content = <div className='p-5 text-center text-base text-error font-bold'>{error?.error ? error?.error : error?.data && error?.data?.message === 'getaddrinfo ENOTFOUND ac-0vks9ft-shard-00-01.3ur0kba.mongodb.net' ? 'Internet Issue' : error?.data?.message}</div>
     if (!isLoading && !isError && !data.length) content = <div className='p-5 text-center text-base font-bold'>You have no connection!</div>
     if (!isLoading && !isError && data.length) content = data.map((user, index) => <EachUser key={index} user={user} />)
     return (

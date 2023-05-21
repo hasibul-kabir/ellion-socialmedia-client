@@ -14,7 +14,7 @@ const People = () => {
 
     let content;
     if (isLoading) content = <Skeleton />
-    if (!isLoading && isError) content = <Error errorMessage={error?.error ? error?.error : error?.data && error?.data?.message} />
+    if (!isLoading && isError) content = <Error errorMessage={error?.error ? error?.error : error?.data && error?.data?.message === 'getaddrinfo ENOTFOUND ac-0vks9ft-shard-00-01.3ur0kba.mongodb.net' ? 'Internet Issue' : error?.data?.message} />
     if (!isLoading && !isError && isSuccess && !data.length) content = <Error errorMessage={'No post here'} />
     if (!isLoading && !isError && isSuccess && data.length) content = exceptFriendAndme.map((userInfo, index) => <ProfileCard key={index} userInfo={userInfo} />)
     return (

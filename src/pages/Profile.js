@@ -34,7 +34,7 @@ const Profile = () => {
             <div className='hidden md:block'>
             </div>
         </div>
-    if (!isLoading && isError) content = <Error errorMessage={error?.error ? error.error : error?.data?.message && error.data.message} />
+    if (!isLoading && isError) content = <Error errorMessage={error?.error ? error.error : error?.data?.message && error?.data?.message === 'getaddrinfo ENOTFOUND ac-0vks9ft-shard-00-01.3ur0kba.mongodb.net' ? 'Internet Issue' : error?.data?.message} />
 
     if (!isLoading && !isError && isSuccess) content = <div className='mx-5 md:mx-10 mt-5 grid md:grid-cols-8 grid-cols-1 md:gap-x-4'>
         <div className='hidden md:block'></div>

@@ -8,7 +8,7 @@ const UserPosts = ({ userId }) => {
 
     let content;
     if (isLoading) content = <Post isLoading={isLoading} />
-    if (!isLoading && isError) content = <Error errorMessage={error?.error ? error?.error : error?.data && error?.data?.message} />
+    if (!isLoading && isError) content = <Error errorMessage={error?.error ? error?.error : error?.data && error?.data?.message === 'getaddrinfo ENOTFOUND ac-0vks9ft-shard-00-01.3ur0kba.mongodb.net' ? 'Internet Issue' : error?.data?.message} />
     if (!isLoading && !isError && isSuccess && !data.length) content = <Error errorMessage={'No post here'} />
     if (!isLoading && !isError && isSuccess && data.length > 0) content = data.map((post, index) => <Post key={index} post={post} />)
     return (

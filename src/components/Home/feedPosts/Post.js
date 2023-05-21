@@ -50,6 +50,7 @@ const Post = ({ isLoading, post }) => {
     }, [isError, deleting, isSuccess, data, error])
     //
 
+
     return (
         <>
             <div className="bg-base-100 rounded-lg p-5">

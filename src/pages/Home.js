@@ -23,7 +23,7 @@ const Home = () => {
                 </div>
 
                 <div className='hidden md:block'>
-                    <Advertisement />
+                    {/* <Advertisement /> */}
                     <Contacts user={user} />
                 </div>
             </div>
