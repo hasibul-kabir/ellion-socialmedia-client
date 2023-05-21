@@ -12,7 +12,6 @@ const FeedPosts = () => {
     if (!isLoading && !isError && isSuccess && !data.length) content = <Error errorMessage={'No post here'} />
     if (!isLoading && !isError && isSuccess && data.length > 0) content = data.map((post, index) => <Post key={index} post={post} />)
 
-    console.log(error);
     return (
         <div className='post flex flex-col gap-y-2'>
             {content}

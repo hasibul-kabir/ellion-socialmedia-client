@@ -29,10 +29,18 @@ export const userApi = apiSlice.injectEndpoints({
             }),
             invalidatesTags: ['User', 'Friends', 'NotFriend']
         }),
+        updateProfilePic: builder.mutation({
+            query: (data) => ({
+                url: `/users/editphoto`,
+                method: 'PATCH',
+                body: data
+            }),
+            invalidatesTags: ['User', 'Friends', 'NotFriend']
+        }),
         searchUser: builder.query({
             query: (key) => `/users/search/${key}`
         })
     })
 })
 
-export const { useGetUserQuery, useEditProfileMutation, useGetFriendsQuery, useGetUserNotFriendsQuery, useAddRemoveFriendMutation, useSearchUserQuery } = userApi;
+export const { useGetUserQuery, useEditProfileMutation, useGetFriendsQuery, useGetUserNotFriendsQuery, useAddRemoveFriendMutation, useUpdateProfilePicMutation, useSearchUserQuery } = userApi;

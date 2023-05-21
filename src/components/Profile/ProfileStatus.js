@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 
 import { HiUserAdd, HiUserRemove } from 'react-icons/hi';
@@ -6,8 +6,10 @@ import About from './About';
 import { useSelector } from 'react-redux';
 import { useAddRemoveFriendMutation, useGetUserQuery } from '../../RTK/features/users/userApi';
 import { ToastContainer, toast } from 'react-toastify';
+import UpdatePictureModal from '../editProfile/UpdatePictureModal';
 
 const ProfileStatus = ({ isLoading, data }) => {
+    const [open, setOpen] = useState(false);
     const { user } = useSelector((state) => state.auth);
     const { _id, firstName, lastName, picturePath, friends } = data || {}; //selected profile
     const { isLoading: userLoading, isError: userError, data: userData } = useGetUserQuery(user?._id); // my profile
@@ -31,6 +33,13 @@ const ProfileStatus = ({ isLoading, data }) => {
     return (
         <>
             <div className="bg-base-100 rounded-md mb-5 px-4">
+                {
+                    user?._id === _id &&
+                    <div
+                        className='mt-5 px-2 py-1 bg-neutral-700 rounded-md w-fit text-basic font-semibold cursor-pointer'
+                        onClick={() => setOpen(true)}
+                    >Update Picture</div>
+                }
                 <div className='text-center py-5'>
                     <div className="avatar">
                         <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
@@ -90,6 +99,8 @@ const ProfileStatus = ({ isLoading, data }) => {
                 pauseOnHover
                 theme="light"
             />
+
+            <UpdatePictureModal open={open} setOpen={setOpen} />
         </>
     )
 }
