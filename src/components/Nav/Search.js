@@ -23,7 +23,7 @@ const Search = () => {
                 <input
                     tabIndex={0}
                     type="text"
-                    placeholder="Search by name"
+                    placeholder="Search by last name"
                     className="px-5 py-3 focus:outline-none rounded-xl w-11/12 md:w-full text-neutral-600 font-normal"
                     value={key}
                     onChange={(e) => setKey(e.target.value)}
